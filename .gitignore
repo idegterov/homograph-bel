@@ -1,0 +1,23 @@
+.DS_Store
+.coverage
+.mypy_cache/
+.pytest_cache/
+.pyright/
+.ruff_cache/
+.venv/
+__pycache__/
+*.egg-info/
+*.py[cod]
+build/
+dist/
+htmlcov/
+
+# Local data, credentials, and generated artifacts are never repository content.
+.env
+.env.*
+!.env.example
+artifacts/
+data/
+*.ckpt
+*.onnx
+*.safetensors

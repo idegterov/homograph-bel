@@ -1,0 +1,78 @@
+[project]
+name = "homograph-bel"
+version = "0.1.0"
+description = "Production Belarusian homograph dictionary and constrained LLM prompt utility"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE", "LICENSES/*.txt", "DATA_LICENSE.md", "NOTICE.md"]
+authors = [{ name = "Igor Degterov" }]
+keywords = ["belarusian", "homograph", "stress", "tts", "nlp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Natural Language :: Belarusian",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.scripts]
+homograph-bel = "homograph_bel.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/idegterov/homograph-bel"
+Documentation = "https://github.com/idegterov/homograph-bel#readme"
+Repository = "https://github.com/idegterov/homograph-bel.git"
+Issues = "https://github.com/idegterov/homograph-bel/issues"
+Changelog = "https://github.com/idegterov/homograph-bel/blob/main/CHANGELOG.md"
+
+[dependency-groups]
+dev = [
+    "pre-commit",
+    "pyright",
+    "pytest",
+    "pytest-cov",
+    "ruff",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.0,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+addopts = [
+    "-ra",
+    "--strict-config",
+    "--strict-markers",
+    "--cov=homograph_bel",
+    "--cov-report=term-missing",
+    "--cov-fail-under=100",
+]
+testpaths = ["tests"]
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["B", "E4", "E7", "E9", "F", "I", "RUF", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["homograph_bel"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["RUF001"]
+
+[tool.uv.build-backend]
+module-root = "src"

@@ -1,0 +1,24 @@
+release = "RELEASE-202601"
+asset_name = "RELEASE-202601.zip"
+url = "https://github.com/Belarus/GrammarDB/releases/download/RELEASE-202601/RELEASE-202601.zip"
+sha256 = "393756f3cb5c94ab86cdbd64b95fa9d096775f559ae65de6375ebb6d5571df00"
+orthography = "A2008"
+xml_members = [
+  "A1.xml",
+  "A2.xml",
+  "C.xml",
+  "E.xml",
+  "I.xml",
+  "M.xml",
+  "N1.xml",
+  "N2.xml",
+  "N3.xml",
+  "NP.xml",
+  "P.xml",
+  "R.xml",
+  "S.xml",
+  "V.xml",
+  "W.xml",
+  "Y.xml",
+  "Z.xml",
+]
