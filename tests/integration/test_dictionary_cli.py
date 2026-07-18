@@ -51,6 +51,36 @@ def test_cli_lists_and_shows_homographs(tmp_path: Path, capsys: pytest.CaptureFi
     assert shown["candidates"][0]["analyses"][0]["morphology"]
 
 
+def test_cli_reports_dictionary_statistics(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    bundle = _bundle(tmp_path)
+
+    assert main(["dictionary", "stats", "--bundle", str(bundle)]) == 0
+    statistics = json.loads(capsys.readouterr().out)
+
+    assert statistics == {
+        "analyses": {
+            "by_pos": {"NOUN": 1, "VERB": 1},
+            "decoded": 2,
+            "total": 2,
+            "with_meaning": 2,
+        },
+        "candidates": {
+            "average_per_homograph": 2.0,
+            "by_lifecycle_status": {"production_supported": 2},
+            "maximum_per_homograph": 2,
+            "total": 2,
+        },
+        "homographs": {
+            "by_candidate_count": {"2": 1},
+            "by_status": {"contextual": 1},
+            "total": 1,
+        },
+        "release": "test-release",
+    }
+
+
 def test_cli_detects_text_and_streams_input_file(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:

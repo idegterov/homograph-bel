@@ -7,19 +7,73 @@ The package ships a verified Dictionary v2 derived from Belarus GrammarDB
 `RELEASE-202601`: 19,992 homograph surfaces, 40,167 stressed candidates, and
 73,047 source analyses. Runtime dependencies: none. Runtime network calls: none.
 
+## Dictionary statistics
+
+All figures below are generated from the bundled `RELEASE-202601` dictionary.
+Reproduce the complete JSON report with:
+
+```bash
+homograph-bel dictionary stats
+```
+
+| Metric | Count |
+| --- | ---: |
+| Homograph surfaces | 19,992 |
+| Stressed candidate options | 40,167 |
+| GrammarDB analyses | 73,047 |
+| Average options per homograph | 2.0092 |
+| Maximum options for one homograph | 3 |
+| Safely morphology-decoded analyses | 73,047 (100%) |
+| Analyses carrying a source meaning | 4,300 (5.89%) |
+
+Candidate-option distribution:
+
+| Options | Homographs | Share |
+| ---: | ---: | ---: |
+| 2 | 19,809 | 99.08% |
+| 3 | 183 | 0.92% |
+
+Dictionary status and candidate readiness:
+
+| Category | Count | Share |
+| --- | ---: | ---: |
+| Free variant homographs | 12,068 | 60.36% |
+| Contextual homographs | 7,218 | 36.10% |
+| Conflict homographs | 706 | 3.53% |
+| Production-supported candidates | 33,921 | 84.45% |
+| Candidate-only options | 6,246 | 15.55% |
+
+The largest morphology/POS groups are:
+
+| POS | Analyses | Share |
+| --- | ---: | ---: |
+| Adjective (`ADJ`) | 21,340 | 29.21% |
+| Verb (`VERB`) | 20,329 | 27.83% |
+| Noun (`NOUN`) | 15,464 | 21.17% |
+| Participle (`PARTICIPLE`) | 9,331 | 12.77% |
+| Proper noun (`PROPN`) | 5,389 | 7.38% |
+| Other POS groups | 1,194 | 1.63% |
+
+Counts describe dictionary records, not unique lemmas. One stressed option can
+carry several possible analyses. `contextual` entries need sentence evidence;
+`free_variant` records share an analysis signature across stress alternatives;
+`conflict` records retain unresolved source evidence. `candidate_only` options
+should not be treated as production pronunciations without an application
+policy.
+
 ## Install
 
 Python 3.12 or 3.13 is required. Until a PyPI release exists, install the pinned
 GitHub release:
 
 ```bash
-uv tool install "homograph-bel @ git+https://github.com/idegterov/homograph-bel@v0.1.0"
+uv tool install "homograph-bel @ git+https://github.com/idegterov/homograph-bel@v0.1.1"
 ```
 
 For library use:
 
 ```bash
-uv add "homograph-bel @ git+https://github.com/idegterov/homograph-bel@v0.1.0"
+uv add "homograph-bel @ git+https://github.com/idegterov/homograph-bel@v0.1.1"
 ```
 
 The first command extracts the bundled 5 MB dictionary archive into a user
@@ -32,6 +86,7 @@ No dictionary path is required:
 
 ```bash
 homograph-bel dictionary list --limit 3
+homograph-bel dictionary stats
 homograph-bel dictionary show яна
 homograph-bel dictionary detect --text "Яна чытае кнігу."
 homograph-bel dictionary path

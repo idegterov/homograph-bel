@@ -52,6 +52,7 @@ from homograph_bel.dictionary.review import (
     select_status_overrides,
     write_review_outputs,
 )
+from homograph_bel.dictionary.statistics import dictionary_statistics
 
 __all__ = [
     "ADJUDICATION_SCHEMA_VERSION",
@@ -87,6 +88,7 @@ __all__ = [
     "build_dictionary_v2_from_archive",
     "build_exception_queue",
     "decode_grammar_db_analysis",
+    "dictionary_statistics",
     "load_grammar_db_source_contract",
     "load_human_review_decisions",
     "migrate_dictionary_v1_ids",

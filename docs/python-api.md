@@ -16,6 +16,8 @@ Use `DictionaryIndex.from_bundle(path)` for a custom unpacked Dictionary v2.
 - `index.list_homographs(status=None, limit=None)` returns deterministic surface
   order.
 - `len(index)` returns the number of surfaces.
+- `dictionary_statistics(index)` returns the JSON-safe option, status,
+  lifecycle, morphology, meaning, and POS report used by `dictionary stats`.
 
 ## Detect
 
