@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import cast
 
 from homograph_bel.dictionary.index import DictionaryBundleError, DictionaryIndex
+from homograph_bel.dictionary.statistics import dictionary_statistics
 from homograph_bel.dictionary.v2 import DictionaryStatus
 from homograph_bel.inference.dictionary import (
     HomographOccurrence,
@@ -57,6 +58,9 @@ def _add_dictionary_commands(parser: argparse.ArgumentParser) -> None:
     )
     list_command.add_argument("--limit", type=_positive_integer)
 
+    statistics = commands.add_parser("stats", help="report dictionary coverage statistics")
+    _add_bundle(statistics)
+
     show = commands.add_parser("show", help="show one homograph and its evidence")
     show.add_argument("surface")
     _add_bundle(show)
@@ -96,6 +100,9 @@ def _run_dictionary(arguments: argparse.Namespace) -> int:
         print(bundled_dictionary_path(arguments.cache_root))
         return 0
     index = _dictionary_index(arguments)
+    if command == "stats":
+        _print_json(dictionary_statistics(index), pretty=True)
+        return 0
     if command == "list":
         status = DictionaryStatus(arguments.status) if arguments.status is not None else None
         for item in index.list_homographs(status=status, limit=arguments.limit):
